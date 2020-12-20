@@ -3,7 +3,9 @@
 @section('content')
 <div class="container">
     <h1>まちねこ</h1>
-
+    @php
+        $json_discoveries = json_encode($discoveries,JSON_PRETTY_PRINT);
+    @endphp
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -21,12 +23,10 @@
             </div>
         </div>
     </div>
-
-    <div class="row justify-content-center mt-3">
+    
+    <div class="row justify-content-center mt-3 mb-3">
         <div id="map" class="col-8" style="height: 20rem;">
-            
         </div>
-        
     </div>
     <div class="row">
         <a href="/discover" class="btn btn-outline-info">ねこ情報を投稿する</a>
@@ -41,7 +41,8 @@
         </div>
     @endforeach
 </div>
+<script>var discoveries = <?php echo $json_discoveries ?>;</script>
 <script src="{{ asset('js/result.js') }}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key={{ config("services.google-map.apikey") }}&callback=initMap&libraries=&v=weekly" defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ config("services.google-map.apikey") }}&callback=locationMap&libraries=&v=weekly" defer></script>
 
 @endsection

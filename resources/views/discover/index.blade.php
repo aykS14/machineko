@@ -16,7 +16,11 @@
         </div>
         <div class="form-group">
             <label for="locate">猫さんの発見場所</label>
-                <input class="form-control" type="text" id="locate" name="locate">
+                <input class="form-control" type="text" id="locate" name="locate" onchange="storeMap()">
+        </div>
+        <div class="row justify-content-center mt-3 mb-3">
+            <div id="map" class="col-8" style="height: 15rem;">
+            </div>
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -33,5 +37,5 @@
     </form>
 </div>
 <script src="{{ asset('js/result.js') }}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key={{ config("services.google-map.apikey") }}&callback=initMap&libraries=&v=weekly" defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ config("services.google-map.apikey") }}&callback=initMap" defer></script>
 @endsection
