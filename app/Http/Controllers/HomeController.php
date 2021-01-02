@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use App\Discovery;
 
 class HomeController extends Controller
@@ -14,7 +17,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
+        $this->middleware('verified');
     }
 
     /**
@@ -26,5 +30,23 @@ class HomeController extends Controller
     {
         $discoveries = Discovery::get();
         return view('home', compact('discoveries'));
+    }
+    public function marker(Request $request)
+    {
+        $lat = $request->input('lat');
+        $lng = $request->input('lng');
+        
+        $latmin = $request->input('swLat');
+        $latmax = $request->input('neLat');
+
+        $lngmin = $request->input('swlng');
+        $lngmax = $request->input('nelng');
+
+        $discoveries = Discovery::
+            whereBetween('lat', [$latmin, $latmax])
+            ->whereBetween('lng', [$lngmin, $lngmax])
+            ->get();
+
+        return response()->json($discoveries);
     }
 }

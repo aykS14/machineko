@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDiscoveriesTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,13 @@ class CreateDiscoveriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('discoveries', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->uuid('uuid')->unique();
+            $table->string('cat_id');
             $table->bigInteger('user_id');
-            $table->string('images');
-            $table->string('pattern');
-            $table->string('locate');
-            $table->double('Lat');
-            $table->double('Lng');
-            
+            $table->string('message');
+
             $table->timestamps();
         });
     }
@@ -35,6 +31,6 @@ class CreateDiscoveriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('discoveries');
+        Schema::dropIfExists('comments');
     }
 }
