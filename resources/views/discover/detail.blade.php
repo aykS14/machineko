@@ -5,12 +5,23 @@
     @php
         $json_cat = json_encode($cat,JSON_PRETTY_PRINT);
     @endphp
-    <h1>{{$cat->pattern}}</h1>
     <div class="card mb-3">
+        <div class="card-header">
+            <div class="row justify-content-between">
+                <div class="col-auto mr-auto">
+                    <h5 >{{$cat->pattern}}</h5>
+                </div>
+                @if ($auths->id == $cat->user_id)
+                    <div class="col-auto">
+                        <a href="/discover/delete/{{$cat->uuid}}" class="btn btn-outline-danger btn-sm">削除</a>
+                        <a href="" class="btn btn-outline-success btn-sm">編集</a>
+                    </div>
+                @endif
+            </div>
+        </div>
         <div class="row">
-            <div class="col-md-4 d-flex align-items-center">
+            <div class="col-md-8 d-flex align-items-center">
                 {{-- <img class="card-img-top img-thumbnail" alt="{{$cat->images}}の画像" src="/uploads/cats_imgs/{{ $cat->images }}"> --}}
-
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         @foreach ($cat_imgs as $key => $cat_img)
@@ -36,13 +47,16 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-4">
                 <div class="card-body">
                     <span>発見日時：</span><span class="utc" id="discovertime" data-name="{{$cat->created_at}}"></span>
                     <p class="card-text">発見場所：{{$cat->locate}}</p>
                     <div id="map" class="col" style="height: 15rem;"></div>
                 </div>
             </div>
+        </div>
+        <div class="card-footer text-right">
+            <a href="/home" >≪マップへ戻る</a>
         </div>
     </div>
     <form action="/discover/comment/{{ $cat->uuid }}" method="post">
@@ -59,12 +73,18 @@
     @foreach ($comments as $comment)
         <div class="card mt-3">
             <div class="card-header">
-                <span class="card-title utc" id="utc_{{$comment->id}}" data-name="{{$comment->updated_at}}"></span>
+                {{ $comment->user->name }}
             </div>
             <div class="card-body">
-                <h5 class="card-title">{{$auths->name}}</h5>
                 <p class="card-text">{{$comment->message}}</p>
+                <small class="text-muted"><p class="card-text utc" id="utc_{{$comment->id}}" data-name="{{$comment->updated_at}}"></p></small>
             </div>
+            @if ($auths->id == $comment->user_id)
+                <div class="card-footer text-right">
+                    <a href="/discover/msgdelete/{{$cat->uuid}}/{{$comment->id}}" class="btn btn-outline-danger btn-sm">削除</a>
+                    <a href="" class="btn btn-outline-success btn-sm">編集</a>
+                </div>
+            @endif
         </div>
     @endforeach
 

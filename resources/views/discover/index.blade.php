@@ -50,8 +50,13 @@
             </div>
         </div>
 
-        <div>
-            <input class="btn btn-primary" type="submit" value="投稿する">
+        <div class="row justify-content-between mb-3">
+            <div class="col-auto mr-auto">
+                <input class="btn btn-primary" type="submit" value="投稿する">
+            </div>
+            <div class="col-auto">
+                <a href="/home" class="btn btn-outline-secondary">マップへ戻る</a>
+            </div>
         </div>
     </form>
 </div>

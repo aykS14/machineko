@@ -69,6 +69,11 @@ class DiscoveryController extends Controller
         $cat = Discovery::where('uuid', '=', $uuid)->first();
         $cat_imgs = explode(",", $cat['images']);
         $comments = Comment::where('cat_id', '=', $cat['id'])->latest()->get();
+        // $comments = Comment::select()
+        //             ->join('comments', 'users.id', '=', 'comments.user_id')
+        //             ->where('cat_id', '=', $cat['id'])
+        //             ->latest()
+        //             ->get();
         return view('discover/detail', compact('auths','cat','comments','cat_imgs'));
     }
 
@@ -87,6 +92,38 @@ class DiscoveryController extends Controller
             'message' => $message
         ]);
         
+        return redirect('discover/detail/'.$uuid);
+    }
+
+    // 猫情報の削除（自分が投稿の猫情報に限り、画像、コメントごと削除）
+    public function catdelete($uuid){
+        $cat = Discovery::where('uuid', '=', $uuid)->first();
+
+        $cat_imgs = explode(",", $cat['images']);
+        $disk = Storage::disk('s3');
+        foreach ($cat_imgs as $item):
+
+            $keys = parse_url($item); //パース処理
+            $path = explode("/", $keys['path']); //分割処理
+            $last = end($path); //最後の要素を取得
+
+            $disk->delete("/cats_imgs/$last");
+        endforeach;
+
+        $comments = Comment::where('cat_id', '=', $cat['id'])->get();
+        foreach ($comments as $comment):
+            $comment->delete();
+        endforeach;
+
+        $cat->delete();
+
+        return redirect('/home');
+    }
+
+    // コメントの削除（自分が投稿の分だけ）
+    public function msgdelete($uuid,$id){
+        $comment = Comment::where('id', '=', $id)->first();
+        $comment->delete();
         return redirect('discover/detail/'.$uuid);
     }
 }

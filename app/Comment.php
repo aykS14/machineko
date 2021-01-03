@@ -11,6 +11,13 @@ class Comment extends Model
         'user_id',
         'message',
     ];
+
+    //belongsTo設定
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
     // protected function asDateTime($value) {
     //     $date = parent::asDateTime($value);
     //     $time_zone = null;

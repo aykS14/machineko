@@ -50,4 +50,13 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new ResetPasswordNotification($token));
     }
+
+    // //primaryKeyの変更
+    // protected $primaryKey = "user_id";
+
+    //hasMany設定
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
 }

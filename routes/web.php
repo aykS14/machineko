@@ -34,4 +34,8 @@ Route::middleware('verified')->group(function() {
     Route::get('/discover/detail/{uuid}', 'DiscoveryController@detail');
     Route::post('/discover/comment/{uuid}', 'DiscoveryController@comment');
 
+    Route::get('/discover/delete/{uuid}', 'DiscoveryController@catdelete');
+
+    Route::get('/discover/msgdelete/{uuid}/{id}', 'DiscoveryController@msgdelete');
+
 });
