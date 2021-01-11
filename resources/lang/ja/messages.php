@@ -41,7 +41,7 @@ return [
     'CatInfo DeleteSentence' => 'この猫さん情報を削除してよろしいですか？',
     'Comment DeleteSentence' => 'このコメントを削除してよろしいですか？',
 
-
+    'TEST' => 'テスト',
 
 
 ];

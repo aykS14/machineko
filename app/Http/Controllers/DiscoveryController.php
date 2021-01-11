@@ -231,4 +231,5 @@ class DiscoveryController extends Controller
         }
         return redirect('discover/detail/'.$uuid);
     }
+
 }

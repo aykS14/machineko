@@ -118,8 +118,8 @@
 
 </div>
 
+<script> const cat = @json($cat);</script>
 <script src='{{ asset("js/detail.js") }}'></script>
-<script> var cat = @json($cat);</script>
 <script src='{{ asset("js/gmap.js") }}'></script>
 <script src='https://maps.googleapis.com/maps/api/js?key={{ config("services.google-map.apikey") }}&callback=placeMap' defer></script>
 

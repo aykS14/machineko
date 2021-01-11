@@ -41,5 +41,7 @@ return [
     'CatInfo DeleteSentence' => 'Are you sure you want to remove this content?',
     'Comment DeleteSentence' => 'Are you sure you want to remove this comment?',
 
+    'TEST' => 'check',
+
 
 ];

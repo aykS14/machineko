@@ -1,9 +1,9 @@
-var map;
-var marker = [];
-var infoWindow = [];
+let map;
+let marker = [];
+let infoWindow = [];
 
 function initialize(){
-    var mapProp = {
+    let mapProp = {
         center: new google.maps.LatLng(38, -78),
         zoom: 10,
         mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -15,8 +15,8 @@ function initialize(){
 function locationMap() {
     
     targetmap = document.getElementById("map");
-    var mapLatLng = new google.maps.LatLng({lat: 35.6585769, lng: 139.7454506}); // 緯度経度のデータ作成
-    var mapobj = new google.maps.Map(targetmap, { // #mapに地図を埋め込む
+    let mapLatLng = new google.maps.LatLng({lat: 35.6585769, lng: 139.7454506}); // 緯度経度のデータ作成
+    let mapobj = new google.maps.Map(targetmap, { // #mapに地図を埋め込む
         center: mapLatLng, // 地図の中心を指定
         zoom: 15 // 地図のズームを指定
     });
@@ -26,7 +26,7 @@ function locationMap() {
         // 取得成功した場合
         function(position) {
             //現在値情報の地図表示
-            var mapLatLng = new google.maps.LatLng({lat: position.coords.latitude, lng: position.coords.longitude}); // 緯度経度のデータ作成
+            let mapLatLng = new google.maps.LatLng({lat: position.coords.latitude, lng: position.coords.longitude}); // 緯度経度のデータ作成
             mapobj = new google.maps.Map(targetmap, { // #mapに地図を埋め込む
                 center: mapLatLng, // 地図の中心を指定
                 zoom: 15 // 地図のズームを指定
@@ -40,12 +40,12 @@ function locationMap() {
                 requestData.lat = position.coords.latitude; //緯度
                 requestData.lng = position.coords.longitude; //経度
 
-                var latlngBounds = mapobj.getBounds();//地図の中心
+                const latlngBounds = mapobj.getBounds();//地図の中心
 
                 //console.log('latlngBounds:',latlngBounds,'mapLatLng:',mapLatLng);
 
-                var swLatlng = latlngBounds.getSouthWest();//地図左下
-                var neLatlng = latlngBounds.getNorthEast();//地図右上
+                const swLatlng = latlngBounds.getSouthWest();//地図左下
+                const neLatlng = latlngBounds.getNorthEast();//地図右上
 
                 requestData.swLat = swLatlng.lat();//地図左下緯度
                 requestData.swlng = swLatlng.lng();//地図左下経度
