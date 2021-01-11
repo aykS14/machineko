@@ -24,7 +24,7 @@
                 </div>
                 @if ($auths->id == $cat->user_id)
                     <div class="col-auto">
-                        <a href="/discover/delete/{{$cat->uuid}}" class="btn btn-outline-danger btn-sm">{{ __('messages.Delete') }}</a>
+                        <a href="/discover/delete/{{$cat->uuid}}"  class="btn btn-outline-danger btn-sm" onclick="return confirm('{{ __('messages.CatInfo DeleteSentence')}}')">{{ __('messages.Delete') }}</a>
                         <a href="/discover/modify/{{$cat->uuid}}" class="btn btn-outline-success btn-sm">{{ __('messages.Edit') }}</a>
                     </div>
                 @endif
@@ -108,7 +108,7 @@
                 </div>
                 @if ($auths->id == $comment->user_id)
                     <div class="card-footer text-right">
-                        <a href="/discover/msgdelete/{{$cat->uuid}}/{{$comment->id}}" class="btn btn-outline-danger btn-sm">{{ __('messages.Delete') }}</a>
+                        <a href="/discover/msgdelete/{{$cat->uuid}}/{{$comment->id}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('{{ __('messages.Comment DeleteSentence')}}')">{{ __('messages.Delete') }}</a>
                         <input type="button" class="btn btn-outline-success btn-sm" id="bt_{{$comment->id}}" onclick="commentedit({{$comment->id}})" value="{{ __('messages.Edit') }}">
                     </div>
                 @endif

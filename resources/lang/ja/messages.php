@@ -38,6 +38,9 @@ return [
     'Location of discovery' => '発見場所：',
     'Comments' => 'コメント：',
 
+    'CatInfo DeleteSentence' => 'この猫さん情報を削除してよろしいですか？',
+    'Comment DeleteSentence' => 'このコメントを削除してよろしいですか？',
+
 
 
 

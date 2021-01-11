@@ -37,4 +37,9 @@ return [
     'Date of discovery' => 'Date: ',
     'Location of discovery' => 'Location: ',
     'Comments' => 'Comments：',
+
+    'CatInfo DeleteSentence' => 'Are you sure you want to remove this content?',
+    'Comment DeleteSentence' => 'Are you sure you want to remove this comment?',
+
+
 ];
