@@ -18,7 +18,6 @@ class CreateDiscoveriesTable extends Migration
 
             $table->uuid('uuid')->unique();
             $table->bigInteger('user_id');
-            $table->string('images');
             $table->string('pattern');
             $table->string('locate');
             $table->double('Lat');

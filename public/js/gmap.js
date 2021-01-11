@@ -31,9 +31,10 @@ function locationMap() {
                 center: mapLatLng, // 地図の中心を指定
                 zoom: 15 // 地図のズームを指定
             });
-            console.log('mapobj1:',mapobj);
+            //console.log('mapobj1:',mapobj);
             google.maps.event.addListener(mapobj, 'bounds_changed', function() {
                 const csrf = document.getElementsByName('csrf-token')[0].content;//'X-CSRF-TOKEN'設定用
+                //console.log('csrf:',csrf);
 
                 const requestData = {};
                 requestData.lat = position.coords.latitude; //緯度
@@ -68,7 +69,7 @@ function locationMap() {
                 })
                 .then(data => { // 👈 JSONデータ
             
-                    console.log('request_data:',data);
+                    //console.log('request_data:',data);
                     geo(data);//function geo 実行
             
                 })
@@ -107,11 +108,20 @@ function locationMap() {
 
                 var pattern = discoveries[i]['pattern']; //console.log(n,pattern);
                 var uuid = discoveries[i]['uuid']; //console.log(n,pattern);
-                var img = discoveries[i]['images'].split(',');
-                var imgurl = img[0];
+
+                // var img = discoveries[i]['images'].split(',');
+                // var imgurl = img[0];
+                var img = discoveries[i]['filename'];
+                if (img==null) {
+                    var imgurl = "https://machineko.s3-ap-northeast-1.amazonaws.com/cats_imgs/mapicon.png"
+                } else {
+                    var imgurl = "https://machineko.s3.ap-northeast-1.amazonaws.com/cats_imgs/" + img;
+                }
+
                 var dblat =discoveries[i]['Lat'];
                 var dblng =discoveries[i]['Lng'];
-                console.log('mapobj2:',mapobj);
+                // console.log('mapobj2:',mapobj);
+
                 // var address = discoveries[i]['locate'];//住所を指定
     
                 // var geocoder = new google.maps.Geocoder();
@@ -140,13 +150,13 @@ function locationMap() {
 };
 
 function createMarker(name,uuid,latlng,icons,map){
-    console.log('name',name,'uuid',uuid,'latlng',latlng,'icons',icons,'map',map);
+    // console.log('name',name,'uuid',uuid,'latlng',latlng,'icons',icons,'map',map);
     /* InfoWindowクラスのオブジェクトを作成 */
     var infoWindow = new google.maps.InfoWindow();
      
     /* detailへ遷移するURL */
-    var url = '<a href="/discover/detail/' + uuid + '" target="blank">' + name + '</a>';
-    console.log('url:',url);
+    var url = '<a href="/discover/detail/' + uuid + '">' + name + '</a>';
+    // console.log('url:',url);
 
     /* 指定したオプションを使用してマーカーを作成 */
     var marker = new google.maps.Marker({position: latlng,
@@ -233,7 +243,7 @@ function storeMap() {
     geocoder.geocode({ address: address }, function(results, status){
         if (status === 'OK' && results[0]){
             ClearAllIcon();
-            console.log(results[0].geometry.location);
+            //console.log(results[0].geometry.location);
 
             var map = new google.maps.Map(target, {  
                 center: results[0].geometry.location,

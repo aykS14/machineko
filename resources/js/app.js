@@ -30,3 +30,16 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
+
+/**
+ * 言語切替
+ */
+
+let lang = [プルダウンの値などを取得]
+let params = new URLSearchParams()
+let url = '/lang/'+lang // ex. /lang/ja | /lang/enなど
+window.axios.post(url,params)
+    .then((response)=>{
+    })
+    .catch((error)=>{
+    })

@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" >
 </head>
 <body>
     <div id="app">
@@ -41,11 +42,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('messages.Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('messages.Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -67,6 +68,17 @@
                                 </div>
                             </li>
                         @endguest
+                        {{-- 言語切替 --}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="dropdown-lang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Config::get('languages')[App::getLocale()] }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-lledby="dropdown-lang">
+                                @foreach (Config::get('languages') as $lang => $language)
+                                    <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}">{{ $language }}</a>
+                                @endforeach
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>

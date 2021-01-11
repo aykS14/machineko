@@ -2,7 +2,8 @@
 
 namespace App;
 
-use App\Notifications\ResetPasswordNotification;
+use App\Notifications\PasswordResetMultiLang;
+use App\Notifications\VerifyEmailMultiLang;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 //use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
@@ -41,14 +42,23 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * 登録確認メールの送信
+     */
     public function sendEmailVerificationNotification()
     {
-        $this->notify(new \App\Notifications\VerifyEmailJapanese);
+        $this->notify(new VerifyEmailMultiLang);
     }
     
+    /**
+     * パスワード再設定メールの送信
+     *
+     * @param  string  $token
+     * @return void
+     */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new ResetPasswordNotification($token));
+        $this->notify(new PasswordResetMultiLang($token));
     }
 
     // //primaryKeyの変更

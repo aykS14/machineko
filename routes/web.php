@@ -11,9 +11,18 @@
 |
 */
 
+/**
+ * 言語切替
+ */
+Route::get('lang/{lang}', ['as'=>'lang.switch', 'uses'=>'LanguageController@switchLang']);
+// Route::post('lang/{language}', 'LanguageController@language')->name('language');
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/rules', 'RulesController@index');
+Route::get('/rules/privacypolicy', 'RulesController@policy');
 
 Auth::routes(['verify' => true]);
 
@@ -34,8 +43,12 @@ Route::middleware('verified')->group(function() {
     Route::get('/discover/detail/{uuid}', 'DiscoveryController@detail');
     Route::post('/discover/comment/{uuid}', 'DiscoveryController@comment');
 
+    Route::get('/discover/modify/{id}', 'DiscoveryController@modify');
+    Route::post('/discover/update/{id}', 'DiscoveryController@update');
+
     Route::get('/discover/delete/{uuid}', 'DiscoveryController@catdelete');
 
     Route::get('/discover/msgdelete/{uuid}/{id}', 'DiscoveryController@msgdelete');
+    Route::post('/discover/msgedit/{uuid}/{id}', 'DiscoveryController@msgedit');
 
 });

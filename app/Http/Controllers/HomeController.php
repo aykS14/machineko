@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use App\Discovery;
+use App\Image;
 
 class HomeController extends Controller
 {
@@ -17,6 +18,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+        parent::__construct();
         // $this->middleware('auth');
         $this->middleware('verified');
     }
@@ -45,6 +47,7 @@ class HomeController extends Controller
         $discoveries = Discovery::
             whereBetween('lat', [$latmin, $latmax])
             ->whereBetween('lng', [$lngmin, $lngmax])
+            ->leftJoin('images', 'discoveries.id', '=', 'images.cat_id')
             ->get();
 
         return response()->json($discoveries);

@@ -2,21 +2,24 @@
 
 @section('content')
 <div class="container">
+    @php
+        $json_cat = json_encode($cat,JSON_PRETTY_PRINT);
+    @endphp
     
-    <form action="discover/store" method="post" enctype="multipart/form-data">
+    <form action="/discover/update/{{$cat->uuid}}" method="post" enctype="multipart/form-data">
         @csrf
         <h1>{{ __('messages.Post detailed infomation') }}</h1>
         <div class="form-group">
             <label for="nickname">{{ __('messages.Contributor') }}</label>
-            <input type="text" readonly class="form-control" id="nickname" name="nickname" value={{$auths->name}}>
+            <input type="text" readonly class="form-control" id="nickname" name="nickname" value="{{$auths->name}}">
         </div>
         <div class="form-group">
             <label for="pattern">{{ __('messages.Cat Pattern') }}</label>
-            <input class="form-control" type="text" id="pattern" name="pattern">
+            <input class="form-control" type="text" id="pattern" name="pattern" value="{{$cat->pattern}}">
         </div>
         <div class="form-group">
             <label for="locate">{{ __('messages.Discovery location') }}</label>
-            <input class="form-control" type="text" id="locate" name="locate" onchange="storeMap()">
+            <input class="form-control" type="text" id="locate" name="locate" onchange="storeMap()" value="{{$cat->locate}}">
         </div>
         <!--map-->
         <div class="row justify-content-center mt-3 mb-3">
@@ -29,13 +32,13 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="catsphoto">{{ __('messages.Latitude') }}</span>
                 </div>
-                <input type="text" readonly class="form-control" id="lat" name="lat">
+                <input type="text" readonly class="form-control" id="lat" name="lat" value="{{$cat->Lat}}">
             </div>
             <div class="input-group col-6 mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="catsphoto">{{ __('messages.Longitude') }}</span>
                 </div>
-                <input type="text" readonly class="form-control" id="lng" name="lng">
+                <input type="text" readonly class="form-control" id="lng" name="lng" value="{{$cat->Lng}}">
             </div>
         </div>
         <!--↑↑↑-->
@@ -80,6 +83,8 @@
         });
     });
 </script>
+<script> var cat = @json($cat);</script>
 <script src='{{ asset("js/gmap.js") }}'></script>
-<script src='https://maps.googleapis.com/maps/api/js?key={{ config("services.google-map.apikey") }}&callback=initMap' defer></script>
+<script src='https://maps.googleapis.com/maps/api/js?key={{ config("services.google-map.apikey") }}&callback=placeMap' defer></script>
+
 @endsection

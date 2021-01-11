@@ -28,8 +28,8 @@
         <div id="map" class="col" style="height: 25rem;">
         </div>
     </div>
-    <div class="row">
-            <a href="/discover" class="btn btn-outline-info">ねこ情報を投稿する</a>
+    <div class="row float-right">
+            <a href="/discover" class="btn btn-outline-info">{{ __('messages.Post Discovered') }}</a>
     </div>
     {{-- @foreach ($discoveries as $discovery)
         <div class="card">
@@ -41,7 +41,7 @@
         </div>
     @endforeach --}}
 </div>
-<script src='{{ asset("js/result.js") }}'></script>
+<script src='{{ asset("js/gmap.js") }}'></script>
 <script src='https://maps.googleapis.com/maps/api/js?key={{ config("services.google-map.apikey") }}&callback=locationMap&libraries=&v=weekly' defer></script>
 
 @endsection

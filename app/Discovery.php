@@ -22,4 +22,9 @@ class Discovery extends Model
     {
         return 'uuid';
     }
+    //hasMany設定
+    public function images()
+    {
+        return $this->hasMany('App\Image');
+    }
 }

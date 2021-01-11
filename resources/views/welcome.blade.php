@@ -70,10 +70,10 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('login') }}">{{ __('messages.Login') }}</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <a href="{{ route('register') }}">{{ __('messages.Register') }}</a>
                         @endif
                     @endauth
                 </div>
@@ -83,19 +83,14 @@
                 <div class="title m-b-md">
                     まちねこ
                 </div>
-                <div>
-                    <a href="/home">マップを見る</a>
+                <div style="height: 5rem;">
+                    <a href="/home">{{ __('messages.View Map') }}</a>
                 </div>
-
-                {{-- <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div> --}}
+                <div class="links mt-5">
+                    <a href="/rules">{{ __('messages.Guidance') }}</a>
+                    <a href="/rules/privacypolicy">{{ __('messages.Privacy Policy') }}</a>
+                </div>
+                
             </div>
         </div>
     </body>

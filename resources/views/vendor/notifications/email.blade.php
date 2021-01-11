@@ -4,9 +4,9 @@
 # {{ $greeting }}
 @else
 @if ($level === 'error')
-# @lang('Whoops!')
+# @lang('email_message.Mail.Whoops')
 @else
-# @lang('Hello!')
+# @lang('email_message.Mail.Opning')
 @endif
 @endif
 
@@ -43,7 +43,7 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-@lang('Regards'),<br>
+@lang('email_message.Mail.Regards')<br>
 {{ config('app.name') }}
 @endif
 
@@ -51,8 +51,7 @@
 @isset($actionText)
 @slot('subcopy')
 @lang(
-    "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-    'into your web browser: [:actionURL](:actionURL)',
+    "email_message.Mail.NotClick",
     [
         'actionText' => $actionText,
         'actionURL' => $actionUrl,
